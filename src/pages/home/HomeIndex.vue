@@ -44,6 +44,7 @@
         </JudgeButton>
         <ContentMain :box="box" :state="show">
             <HeaderBar :menu="menu" :state="show"></HeaderBar>
+            123
         </ContentMain>
     </div>
 </template>
