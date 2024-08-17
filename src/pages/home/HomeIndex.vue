@@ -20,14 +20,6 @@
     position: relative;
     transition: all 0.3 ease;
 }
-
-.rightBox {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    border: 1px solid red;
-}
 </style>
 
 <template>
@@ -50,35 +42,48 @@
         </SilderFade>
         <JudgeButton @update="changeShow">
         </JudgeButton>
-        <div class="rightBox" ref="homeMain">
-            alsdjalskdj
-        </div>
+        <ContentMain :box="box" :state="show">
+            <HeaderBar :menu="menu" :state="show"></HeaderBar>
+        </ContentMain>
     </div>
-
 </template>
 
 <script setup>
 import SilderFade from './components/SilderFade.vue';
 import JudgeButton from '../../components/JudgeButton.vue';
-import { onMounted, ref } from 'vue';
+import ContentMain from './components/ContentMain.vue'
+import HeaderBar from '../../components/navbar/HeaderBar.vue';
+import { ref } from 'vue';
 const show = ref(true)
-const homeMain = ref(null)
+
 const box = {
-    width: '300px',
+    width: '350px',
     height: '100vh',
     backgroundColor: 'rgb(34, 34, 34)'
 }
-onMounted(() => {
-    homeMain.value.style.transition = `width 0.3s ease`
-    homeMain.value.style.width = 'calc(100% - 300px)'
-})
+
+const menu = [{
+    name: '首页',
+    icon: "iconfont icon-home"
+}, {
+    name: '分类',
+    icon: "iconfont icon-sort"
+}, {
+    name: '归档',
+    icon: "iconfont icon-guidang"
+}, {
+    name: '标签',
+    icon: "iconfont icon-24gf-tags2"
+}, {
+    name: '关于',
+    icon: "iconfont icon-guanyu"
+}, {
+    name: '搜索',
+    icon: "iconfont icon-sousuo"
+}]
 const changeShow = (value) => {
     show.value = value
-    console.log(show.value)
-    if (show.value) {
-        homeMain.value.style.width = 'calc(100% - 300px)'
-    } else {
-        homeMain.value.style.width = '100%'
-    }
+    // console.log(show.value)
 }
+
 </script>
