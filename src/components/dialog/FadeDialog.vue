@@ -1,4 +1,4 @@
-<style>
+<style scoped>
 .Fade{
     position: fixed;
     top: 0;
@@ -14,13 +14,13 @@
             <slot name="silder"></slot>
         </Transition>
     </div>
-    <div>
+    <!-- <div class="123">
         <Transition @before-enter="onBeforeEnter" @enter="onEnter" @after-enter="onAfterEnter"
             @enter-cancelled="onEnterCancelled" @before-leave="onBeforeLeave" @leave="onLeave"
             @after-leave="onAfterLeave" @leave-cancelled="onLeaveCancelled" :css="false">
             <slot name="silderAfter"></slot>
         </Transition>
-    </div>
+    </div> -->
 </template>
 
 <script setup>

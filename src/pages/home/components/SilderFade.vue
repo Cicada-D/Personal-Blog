@@ -1,17 +1,18 @@
-<style scoped lang="less"></style>
+<style scoped lang="less">
+</style>
 
 <template>
     <FadeDialog :state="state">
         <template #silder>
             <div ref="Fadebox" v-if="props.show">
-                <slot ></slot>
+                <slot></slot>
             </div>
         </template>
-        <template #silderAfter>
+        <!-- <template #silderAfter>
             <div ref="silderAfter" v-if="props.show">
-                <slot ></slot>
+                <slot></slot>
             </div>
-        </template>
+        </template> -->
     </FadeDialog>
 
 </template>
@@ -21,7 +22,7 @@ import FadeDialog from '../../../components/dialog/FadeDialog.vue';
 import { onMounted, ref } from 'vue';
 
 const Fadebox = ref(null)
-const silderAfter = ref(null)
+// const silderAfter = ref(null)
 const props = defineProps(['fateTime', 'box', 'show'])
 const state = {
     box: props.box ? props.box : {
@@ -39,11 +40,11 @@ onMounted(() => {
     Fadebox.value.style.display = `relative`
     Fadebox.value.style.backgroundColor = `${state.box.backgroundColor}`
 
-    silderAfter.value.style.transition = `ease ${state.time / 1000}s all`
-    silderAfter.value.style.width = `${state.box.width}`
-    silderAfter.value.style.height = `${state.box.height}`
-    silderAfter.value.style.display = `relative`
-    silderAfter.value.style.backgroundColor = `${state.box.backgroundColor}`
+    // silderAfter.value.style.transition = `ease ${state.time / 1000}s all`
+    // silderAfter.value.style.width = `${state.box.width}`
+    // silderAfter.value.style.height = `${state.box.height}`
+    // silderAfter.value.style.display = `relative`
+    // silderAfter.value.style.backgroundColor = `${state.box.backgroundColor}`
 })
 
 </script>

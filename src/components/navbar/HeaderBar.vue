@@ -51,6 +51,7 @@
     font-size: 14px;
     margin-left: 4px;
 }
+
 </style>
 <template>
     <div class="headerBox">
@@ -61,7 +62,7 @@
                 <div class="line"></div>
             </div>
             <div class="box" v-for="(item, index) in props.menu" :key="index">
-                <i :class=item.icon /><span class="textA">{{ item.name }}</span>
+                <a :href="item.href"><i :class=item.icon /><span class="textA">{{ item.name }}</span></a>
             </div>
         </div>
     </div>

@@ -1,19 +1,17 @@
 <style scoped>
-.box {
+.fadeBox{
+    position: relative;
     width: 100%;
     height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
 }
-
-.whiteBox {
-    background-color: white;
-    width: 50px;
-    height: 50px;
+.centerBox{
+    position: absolute;
+    width: 80%;
+    height: 45%;
+    left: 50%;
+    top: 20px;
+    transform: translateX(-50%);
 }
-
 .flex_box {
     display: flex;
     height: 100vh;
@@ -34,16 +32,16 @@
                     },
                     time: props.fateTime ? props.fateTime : 300 //多少毫秒
                 } -->
-            <div class="box">
-                <div class="whiteBox">
-
-                </div>
+            <div class="fadeBox">
+                <PersonalInformation class="centerBox"></PersonalInformation>
             </div>
         </SilderFade>
-        <JudgeButton @update="changeShow">
+        <JudgeButton @update="changeShow"> <!-- 绑定一个点击事件，会返回一个true或者false -->
         </JudgeButton>
         <ContentMain :box="box" :state="show">
             <HeaderBar :menu="menu" :state="show"></HeaderBar>
+            <router-view></router-view>
+
         </ContentMain>
     </div>
 </template>
@@ -53,10 +51,11 @@ import SilderFade from './components/SilderFade.vue';
 import JudgeButton from '../../components/JudgeButton.vue';
 import ContentMain from './components/ContentMain.vue'
 import HeaderBar from '../../components/navbar/HeaderBar.vue';
+import PersonalInformation from './components/PersonalInformation.vue';
 import { ref } from 'vue';
-const show = ref(true)
+const show = ref(true) // 状态值
 
-const box = {
+const box = { // 侧边栏的属性, 当前为默认值
     width: '350px',
     height: '100vh',
     backgroundColor: 'rgb(34, 34, 34)'
@@ -64,24 +63,30 @@ const box = {
 
 const menu = [{
     name: '首页',
-    icon: "iconfont icon-home"
+    icon: "iconfont icon-home",
+    href: '/'
 }, {
     name: '分类',
-    icon: "iconfont icon-sort"
+    icon: "iconfont icon-sort",
+    href: '/type'
 }, {
     name: '归档',
-    icon: "iconfont icon-guidang"
+    icon: "iconfont icon-guidang",
+    href: '/archives'
 }, {
     name: '标签',
-    icon: "iconfont icon-24gf-tags2"
+    icon: "iconfont icon-24gf-tags2",
+    href: '/tages'
 }, {
     name: '关于',
-    icon: "iconfont icon-guanyu"
+    icon: "iconfont icon-guanyu",
+    href: '#'
 }, {
     name: '搜索',
-    icon: "iconfont icon-sousuo"
+    icon: "iconfont icon-sousuo",
+    href: '#'
 }]
-const changeShow = (value) => {
+const changeShow = (value) => { // 绑定的事件， 用来更新状态
     show.value = value
     // console.log(show.value)
 }

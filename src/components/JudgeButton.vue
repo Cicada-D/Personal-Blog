@@ -58,7 +58,6 @@
                     </svg>
                 </div>
             </Transition>
-
         </button>
     </div>
 </template>
