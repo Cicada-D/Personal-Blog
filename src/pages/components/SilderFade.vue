@@ -18,7 +18,7 @@
 </template>
 
 <script setup>
-import FadeDialog from '../../../components/dialog/FadeDialog.vue';
+import FadeDialog from '../../components/dialog/FadeDialog.vue';
 import { onMounted, ref } from 'vue';
 
 const Fadebox = ref(null)

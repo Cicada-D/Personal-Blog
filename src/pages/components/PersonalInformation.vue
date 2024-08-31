@@ -96,12 +96,13 @@
 }
 
 .linkTagesItem {
- 
+
     margin: 5px;
     /* 子元素之间的间距，避免紧挨 */
     box-sizing: border-box;
     /* 包括 padding 和 border 在内计算宽度 */
 }
+
 .linkLastItem {
     margin-top: 10px;
     flex-basis: 90%;
@@ -118,10 +119,10 @@
                     width="96px" height="96px" alt="">
             </div>
             <div class="personalName">
-                知了
+                {{ personalMenu.name }}
             </div>
             <div class="description">
-                真帅！！！！！！！！！！！
+                {{ personalMenu.describe }}
             </div>
         </div>
 
@@ -131,41 +132,17 @@
             </button>
 
             <div class="tagesBox">
-                <div class="tageItem">
-                    <div class="font_18">123</div>
-                    <div class="font_14">日志</div>
-                </div>
-                <div class="tageItem">
-                    <div class="font_18">34</div>
-                    <div class="font_14">分类</div>
-                </div>
-                <div class="tageItem">
-                    <div class="font_18">21</div>
-                    <div class="font_14">标签</div>
+                <div v-for="item, index in personalMenu.tage" :key="index">
+                    <a :href="item.href" class="tageItem">
+                        <div class="font_18">{{ item.num }}</div>
+                        <div class="font_14">{{ item.name }}</div>
+                    </a>
                 </div>
             </div>
 
             <div class="linkTages">
-                <div class="linkTagesItem">
-                    <a href="#">Linkedin</a>
-                </div>
-                <div class="linkTagesItem">
-                    <a href="#">Twitter</a>
-                </div>
-                <div class="linkTagesItem">
-                    <a href="#">E-Mail</a>
-                </div>
-                <div class="linkTagesItem">
-                    <a href="#">S.O.</a>
-                </div>
-                <div class="linkTagesItem">
-                    <a href="#">RSS</a>
-                </div>
-                <div class="linkTagesItem">
-                    <a href="#">CSDN</a>
-                </div>
-                <div class="linkLastItem">
-                    <a href="#">Creative Commons</a>
+                <div v-for="item, index in personalMenu.link" :key="index" :class="[index !== personalMenu.link.length - 1 ? 'linkTagesItem' : 'linkLastItem']">
+                    <a :href="item.htef">{{ item.name }}</a>
                 </div>
             </div>
         </div>
@@ -173,5 +150,14 @@
 </template>
 
 <script setup>
+import { toRefs } from 'vue';
+
+
+const props = defineProps(['personalMenu'])
+const { personalMenu } = toRefs(props)
+
+console.log(props)
+
+console.log(personalMenu)
 
 </script>
