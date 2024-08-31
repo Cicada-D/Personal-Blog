@@ -7,8 +7,11 @@
 
 .centerBox {
     position: absolute;
-    width: 80%;
-    height: 45%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    width: 95%;
+    height: 50%;
     left: 50%;
     top: 20px;
     transform: translateX(-50%);
@@ -20,10 +23,21 @@
     position: relative;
     transition: all 0.3 ease;
 }
+.centerTwo {
+    flex: 1 0;
+    overflow-y: auto;
+}
+.centerOne {
+    border: 1px solid white;
+    height: 40px;
+}
+.centerBar {
+    background-color: #fff;
+    width: 100%;
+}
 </style>
 
 <template>
-
     <div class="flex_box">
         <SilderFade :show="show" :box="box">
             <!-- const state = {
@@ -35,7 +49,14 @@
                     time: props.fateTime ? props.fateTime : 300 //多少毫秒
                 } -->
             <div class="fadeBox">
-                <PersonalInformation class="centerBox" :personalMenu="personalMenu"></PersonalInformation>
+                <div class="centerBox">
+                    <div  class="centerOne">
+                        <ContentNavbar @changeIndex="getIndex"></ContentNavbar>
+                    </div>
+                    <div class="centerTwo">
+                        <PersonalInformation :personalMenu="personalMenu"></PersonalInformation>
+                    </div>
+                </div>
             </div>
         </SilderFade>
         <JudgeButton @update="changeShow"> <!-- 绑定一个点击事件，会返回一个true或者false -->
@@ -56,10 +77,11 @@ import PersonalInformation from './components/PersonalInformation.vue';
 import { ref } from 'vue';
 import { useCounterStore } from '../stores/counter';
 import { storeToRefs } from 'pinia';
+import ContentNavbar from '../components/navbar/ContentNavbar.vue';
 const show = ref(true) // 状态值
 
 const box = { // 侧边栏的属性, 当前为默认值
-    width: '350px',
+    width: '300px',
     height: '100vh',
     backgroundColor: 'rgb(34, 34, 34)'
 }
@@ -93,6 +115,9 @@ const menu = [{
 const store = useCounterStore()
 const { personalMenu } = storeToRefs(store)
 
+function getIndex(data) {
+    console.log('1', data)
+} 
 
 
 const changeShow = (value) => { // 绑定的事件， 用来更新状态

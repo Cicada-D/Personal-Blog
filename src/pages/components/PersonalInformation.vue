@@ -1,21 +1,19 @@
 <style scoped>
 .outerBox {
     width: 100%;
-    height: 100%;
+    height: 350px;
     display: flex;
     flex-direction: column;
     /* justify-content: space-between; */
     align-items: center;
-    overflow-y: auto;
-    /* overflow: hidden; */
 }
 
 .personal {
     display: flex;
-    height: 55%;
+    /* height: 200px; */
     width: 100%;
     flex-direction: column;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     align-items: center;
     color: #999999;
 }
@@ -33,14 +31,18 @@
     font-size: 16px;
     font-weight: 600;
     color: #f5f5f5;
-    margin-top: -2px;
+    margin: 12px 0px 0px;
+}
+
+.describe {
+    margin: 12px 0px 5px;
 }
 
 .linkBox {
     display: flex;
     width: 100%;
-    height: 70px;
-    margin-top: 20px;
+    /* height: 190px; */
+    margin-top: 10px;
     flex-direction: column;
     /* justify-content: center; */
     align-items: center;
@@ -93,11 +95,11 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    font-size: 12px;
 }
 
 .linkTagesItem {
-
-    margin: 5px;
+    margin: 5px 10px;
     /* 子元素之间的间距，避免紧挨 */
     box-sizing: border-box;
     /* 包括 padding 和 border 在内计算宽度 */
@@ -121,7 +123,7 @@
             <div class="personalName">
                 {{ personalMenu.name }}
             </div>
-            <div class="description">
+            <div class="describe">
                 {{ personalMenu.describe }}
             </div>
         </div>
