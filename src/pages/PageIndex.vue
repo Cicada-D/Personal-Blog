@@ -23,14 +23,17 @@
     position: relative;
     transition: all 0.3 ease;
 }
+
 .centerTwo {
     flex: 1 0;
     overflow-y: auto;
 }
+
 .centerOne {
-    border: 1px solid white;
+    /* border: 1px solid white; */
     height: 40px;
 }
+
 .centerBar {
     background-color: #fff;
     width: 100%;
@@ -50,8 +53,8 @@
                 } -->
             <div class="fadeBox">
                 <div class="centerBox">
-                    <div  class="centerOne">
-                        <ContentNavbar @changeIndex="getIndex"></ContentNavbar>
+                    <div class="centerOne" v-if="contentShow">
+                        <ContentNavbar :menu="contentMenu" @changeIndex="getIndex"></ContentNavbar>
                     </div>
                     <div class="centerTwo">
                         <PersonalInformation :personalMenu="personalMenu"></PersonalInformation>
@@ -68,23 +71,26 @@
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import SilderFade from './components/SilderFade.vue';
 import JudgeButton from '../components/JudgeButton.vue';
 import ContentMain from './components/ContentMain.vue'
 import HeaderBar from '../components/navbar/HeaderBar.vue';
 import PersonalInformation from './components/PersonalInformation.vue';
-import { ref } from 'vue';
+import { onBeforeMount, ref } from 'vue';
 import { useCounterStore } from '../stores/counter';
 import { storeToRefs } from 'pinia';
 import ContentNavbar from '../components/navbar/ContentNavbar.vue';
+import { useRoute } from 'vue-router';
 const show = ref(true) // 状态值
+const route = useRoute()
 
 const box = { // 侧边栏的属性, 当前为默认值
     width: '300px',
     height: '100vh',
     backgroundColor: 'rgb(34, 34, 34)'
 }
+
 
 const menu = [{
     name: '首页',
@@ -112,12 +118,22 @@ const menu = [{
     href: '#'
 }]
 
-const store = useCounterStore()
-const { personalMenu } = storeToRefs(store)
 
-function getIndex(data) {
+const store = useCounterStore()
+
+const { personalMenu, contentMenu, contentShow } = storeToRefs(store)
+
+onBeforeMount(() => {
+    if (route.name != '') {
+        store.changeContentShow(false)
+    } else {
+        store.changeContentShow(true)
+    }
+})
+
+function getIndex(data: String) {
     console.log('1', data)
-} 
+}
 
 
 const changeShow = (value) => { // 绑定的事件， 用来更新状态

@@ -33,34 +33,38 @@
 <template>
     <div class="outerBox">
         <div ref="btns" class="center">
-            <button class="navBtn" @click="changeNav">文章目录</button>
-            <button class="navBtn" @click="changeNav">站点概览</button>
+            <button v-for="item, index in props.menu" :key="index" class="navBtn" @click="changeNav">{{ item }}</button>
+            <!-- <button class="navBtn" @click="changeNav">站点概览</button> -->
         </div>
     </div>
 
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { onMounted, ref } from 'vue';
 
 const emit = defineEmits(['changeIndex'])
+const props = defineProps(['menu'])
 
-const btns = ref(null)
+const btns = ref<HTMLElement | null>(null)
 
 onMounted(() => {
-    btns.value.children[0].className = 'clickNavBtn'
+    btns.value?.children[0]?.classList.add('clickNavBtn')
 })
 
 const changeNav = (e) => {
     // console.log(btns.value.children)
-
+    if (btns.value?.children) {
     for (const element of btns.value.children) {
-        if (element.innerText == e.target.innerText) {
-            element.className = 'clickNavBtn'
+        if (element instanceof HTMLElement && element.innerText === (e.target as HTMLElement).innerText) {
+            element.classList.add('clickNavBtn')
+            element.classList.remove('navBtn')
         } else {
-            element.className = 'navBtn'
+            element.classList.add('navBtn')
+            element.classList.remove('clickNavBtn')
         }
     }
+}
     // btns.value.children.forEach(element => {
     // if (element.innerText == e.target.innerText) {
     //     element.className = 'clickNavBtn'
